@@ -1,0 +1,43 @@
+{
+    "Type": "Object",
+    "Children": [
+        {
+            "Type": "Property",
+            "Key": {
+                "Type": "Identifier",
+                "Value": "test"
+            },
+            "Value": {
+                "Type": "Object",
+                "Children": [
+                    {
+                        "Type": "Property",
+                        "Key": {
+                            "Type": "Identifier",
+                            "Value": "num"
+                        },
+                        "Value": {
+                            "Type": "Literal",
+                            "Value": 1
+                        }
+                    }
+                ],
+                "Start": 12,
+                "End": 24
+            }
+        },
+        {
+            "Type": "Property",
+            "Key": {
+                "Type": "Identifier",
+                "Value": "name"
+            },
+            "Value": {
+                "Type": "Literal",
+                "Value": "isaac"
+            }
+        }
+    ],
+    "Start": 0,
+    "End": 0
+}

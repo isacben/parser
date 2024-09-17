@@ -1,0 +1,27 @@
+POST https://todo.com/create
+x-on-behalf-of: acc_12345
+x-api-version: 2024-06-30
+{
+  "text": "go shoping"
+}
+HTTP 200
+[Captures]
+id: jsonpath "$['id']
+
+
+- name: Post a todo
+  url: http://todo.com/create
+  method: POST
+  headers:
+    x-on-behalf-of: acc_1234
+    x-api-version: 2024-06-30
+  respose:
+    http: 200
+    capture:
+      id: .id
+
+
+Notes:
+
+kubernetes jsonpath go lib: https://pkg.go.dev/k8s.io/client-go@v0.31.1/util/jsonpath
+kubernetes jsonpath example: https://gist.github.com/PrasadG193/589975a55ed992a7b138a53c3d0d1836
