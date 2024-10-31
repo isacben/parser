@@ -13,8 +13,12 @@ import (
 func main() {
 
 	var s = `{
-		"test": { "num": 1 },
-		"name": "isaac"
+        "test": { "num": 1 }, # this is an object
+        "test2": 2
+        # comment 1
+        # comment 2
+        # comment 3
+        # "commented": { "some": "object"}
 	}`
 
 	l := lexer.New(s)

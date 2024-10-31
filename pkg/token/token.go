@@ -28,17 +28,12 @@ const (
 	// Comments
 	LineComment  Type = "//"
 	BlockComment Type = "/*"
+	Comment      Type = "#"
 
 	// Values
 	True  Type = "TRUE"
 	False Type = "FALSE"
 	Null  Type = "NULL"
-
-	// Commands
-	Post   Type = "POST"
-	Get    Type = "GET"
-	Header Type = "HEADER"
-	Http   Type = "HTTP"
 )
 
 type Token struct {
@@ -50,10 +45,9 @@ type Token struct {
 }
 
 var validIdentifiers = map[string]Type{
-	"POST":   Post,
-	"GET":    Get,
-	"header": Header,
-	"HTTP":   Http,
+	"true":  True,
+	"false": False,
+	"null":  Null,
 }
 
 func LookupIdentifier(identifier string) (Type, error) {

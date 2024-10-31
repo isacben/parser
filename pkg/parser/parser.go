@@ -10,8 +10,9 @@ package parser
 
 /** nugget gramar
  *
- *  <NUGGET>		::= [ <request> *(<request>) ]
- *  <request>		::= [ <command> " " [ <expression> *('\n' <expression>) ]
+ *  <NUGGET>		::= [ <step> *('\n' <step>) ]
+ *  <step>			::= <request> "\n" <response>
+ *  <request>		::= [ <command> "\n" [ <expression> *('\n' <expression>) ]
  *  <expression>    ::= <property> | <tag>
  *  <command>		::= <string> " " <string> | <number>
  *  <property>		::= <string> ":" <string> | <command>
@@ -78,6 +79,11 @@ func (p *Parser) ParseProgram() (ast.RootNode, error) {
 // nextToken sets our current token to the peek token and the peek token to
 // p.lexer.NextToken() which ends up scanning and returning the next token
 func (p *Parser) nextToken() {
+    // ignore comments
+    for p.peekTokenTypeIs(token.Comment) {
+        p.peekToken = p.lexer.NextToken()
+    }
+
 	p.currentToken = p.peekToken
 	p.peekToken = p.lexer.NextToken()
 }

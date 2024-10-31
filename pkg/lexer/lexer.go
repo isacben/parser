@@ -1,6 +1,9 @@
 package lexer
 
-import "parser/pkg/token"
+import (
+	"fmt"
+	"parser/pkg/token"
+)
 
 /*	TODO:
 *	- read about func (l *Pointer) myFunction() syntax
@@ -35,7 +38,11 @@ func (l *Lexer) readChar() {
 }
 
 // NextToken switches through the lexer's current char and creates a new token.
-// It then it calls readChar() to advance the lexer and it returns the token
+// It then it calls read//
+//
+//
+//
+//Char() to advance the lexer and it returns the token
 func (l *Lexer) NextToken() token.Token {
 	var t token.Token
 
@@ -60,6 +67,12 @@ func (l *Lexer) NextToken() token.Token {
 		t.Line = l.line
 		t.Start = l.position
 		t.End = l.position + 1
+    case '#':
+        t.Type = token.Comment
+        t.Literal = l.readComment()
+        t.Line = l.line
+        t.Start = l.position
+        t.End = l.position + 1
 	case 0:
 		t.Literal = ""
 		t.Type = token.EOF
@@ -128,6 +141,24 @@ func (l *Lexer) readString() string {
 			break
 		}
 	}
+	return string(l.Input[position:l.position])
+}
+
+func (l *Lexer) readComment() string {
+	position := l.position + 1
+	for {
+		l.readChar() // this moves the reading position to the next char
+        if l.char == 0 {
+            break
+        }
+
+		if l.char == '\n' {
+            l.line++
+            l.readChar()
+			break
+		}
+	}
+    fmt.Println("comment is:", string(l.Input[position:l.position]))
 	return string(l.Input[position:l.position])
 }
 
